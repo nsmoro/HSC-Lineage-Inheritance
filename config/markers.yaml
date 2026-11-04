@@ -1,0 +1,46 @@
+# Which marker is in which channel, per experiment and condition, for the CURATED (Matilda) data.
+# Human: from the ConditionsTree_Chrenamed files (columns renamed by DL: LysoBrite = Ch02 everywhere).
+# Mouse: from the per-position Matilda files (LysoBrite = Ch03).
+# >>> Please confirm these assignments with Dirk before using results in figures. <<<
+intensity_prefix: SumBaSiCWithRatioflatCh
+
+human_root: /research_jude/rgs01_jude/groups/loefflgrp/projects/TimelapseData/common/00_ETH
+mouse_root: /research_jude/rgs01_jude/groups/loefflgrp/home/common/Data/NM/PAPER_Division_patterns/mouse_data
+
+human_conditions: &hsc_std            # only HSC conditions were curated
+  1: {name: "HSC TMRM CD71",  markers: {1: CD71,  2: LysoBrite, 3: TMRM}}
+  2: {name: "HSC CD201 CD33", markers: {2: LysoBrite, 6: CD201, 8: CD33}}
+  3: {name: "HSC Inta3 CD71", markers: {1: CD71,  2: LysoBrite, 6: Inta3}}
+  9: {name: "HSC TMRM CD34",  markers: {1: CD34,  2: LysoBrite, 3: TMRM}}
+
+experiments:
+  191125FS13:
+    species: human
+    folder: "{human_root}/191125FS13/Matilda/ConditionsTree_Chrenamed_210310DL"
+    birth_window: 6          # frames after birth in which the first marker value is taken
+    conditions:
+      1: {name: "HSC TMRM CD71",  markers: {1: CD71,  2: LysoBrite, 3: TMRM}}
+      2: {name: "HSC CD201 CD33", markers: {2: LysoBrite, 6: CD201, 8: CD33}}
+      3: {name: "HSC Inta3 CD71", markers: {1: CD71,  2: LysoBrite, 6: Inta3}}
+      9: {name: "HSC JC10",       markers: {1: JC10,  2: LysoBrite}}   # JC10 red not in file
+  191207FS14: {species: human, folder: "{human_root}/191207FS14/Matilda/ConditionsTree_Chrenamed_210217DL", birth_window: 6, conditions: *hsc_std}
+  191216FS13: {species: human, folder: "{human_root}/191216FS13/Matilda/ConditionsTree_Chrenamed_210217DL", birth_window: 6, conditions: *hsc_std}
+  191216FS14: {species: human, folder: "{human_root}/191216FS14/Matilda/ConditionsTree_Chrenamed_210217DL", birth_window: 6, conditions: *hsc_std}
+
+  # mouse: one file per position; condition and antibody panel taken from the experiment XML
+  181117DL14: &mouse
+    species: mouse
+    folder: "{mouse_root}/181117DL14/Matilda/Position"
+    xml: "{mouse_root}/181117DL14/181117DL14_TATexp.xml"
+    birth_window: 4
+    panels:                 # condition name contains -> channel markers
+      Sca1: {1: Sca1,  2: CD41,  3: LysoBrite, 4: FcgR}
+      CD105: {1: CD105, 2: CD201, 3: LysoBrite, 4: CD71}
+  181219DL13:
+    species: mouse
+    folder: "{mouse_root}/181219DL13/Matilda/Position"
+    xml: "{mouse_root}/181219DL13/181219DL13_TATexp.xml"
+    birth_window: 4
+    panels:
+      Sca1: {1: Sca1,  2: CD41,  3: LysoBrite, 4: FcgR}
+      CD105: {1: CD105, 2: CD201, 3: LysoBrite, 4: CD71}
